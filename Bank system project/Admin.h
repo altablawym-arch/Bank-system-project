@@ -11,7 +11,7 @@ public:
     }
 
 
-    void setsalary(double salary) { // عملت سيت للمرتب عشان الادمن يكون له اكسس انه يعرف يعدله 
+    void setsalary(double salary) {  
         if (Validation::vaamount(salary)) {
 
         }
