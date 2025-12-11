@@ -3,57 +3,103 @@
 #include<string>
 #include <cctype>
 #include "Person.h"
+#include<vector>
+#include "FilesHelper.h"
 
-    class Employee : public Person {
-    private:
-        double salary;
+class Employee : public Person {
+private:
+    double salary;
 
-   public:
-       Employee(){}
-       Employee(int id, string name, string password, double salary=500 )
-           :Person(id, name, password),
-           salary(salary) {} 
-       int getid() {
-           return id;
-       }
+public:
+    Employee() {}
+    Employee(int id, string name, string password, double salary = 500)
+        :Person(id, name, password),
+        salary(salary) {
+    }
+    int getid() {
+        return id;
+    }
 
-       double getsalary() {
-           return salary;
-       }
+    double getsalary() {
+        return salary;
+    }
 
-       void setname(string name) {
-           if (name.length() < 3 || name.length() > 20) {
-               cout << "Enter a name between 3 and 20 characters " << endl;
-           }
-           else
-               cout << "Login Successfully" << endl;
-           
-           for (char a : name )
-               if (!isalpha(a)) {
-                   cout << "Name must contain only letters" << endl;
-                   return;
-             }
+    void setsalary(double salary) {
+        this->salary = salary;
+    }
 
-           cout << "name is vaild" << endl;
-       }
+    string getname() {
+        return name;
+    }
 
-       string getname() {
-           return name;
-       }
+    void setpassword(string pass) {
+        if (Validation::vapassword(pass)) {
+            password = pass;
+        }
 
-       void setpass(string pass){
-           if (pass.length() < 3 || pass.length() > 20)
-               cout << "Enter a name between 3 and 20 characters and numbers without spaces " << endl;
-       }
+    }
+
+    string getpassword() {
+        return password;
+    }
 
 
-       string getpass() {
-           return password;
-       }
 
-       void addClient() {
+    void addClient(Client& client) {
+        vectorClient.push_back(client);
+        FilesHelper::saveClient(client);
+    }
 
-       }
+
+    void lestClients() {
+        for (auto& c : vectorClient) {
+            cout << "The ID Is:" << c.getid() << " || "
+                << "Teh Name IS: " << c.getname() << " || "
+                << "The Balance Is: " << c.getbalance() << " || " << endl;
+        }
+    }
+
+    Client* searchClient(int id) {
+        for (auto& c : vectorClient) {
+            if (c.getid() == id) {
+                return&c;
+            }
+        }
+        return nullptr;
+    }
+
+    void editClient(int id, string name, string password, double balance) {
+
+        Client* c = searchClient(id);
+        if (c != nullptr) {
+            c->setname(name);
+            c->setpassword(password);
+            c->setbalance(balance);
+        }
+
+        ofstream file("client.txt", ios::trunc);
+        if (file.is_open()) {
+            for (auto& c : vectorClient) {
+                file << c.getid() << ","
+                    << c.getname() << ","
+                    << c.getpassword() << ","
+                    << c.getbalance() << "\n";
+            }
+
+            file.close();
+            cout << "Client updated successfully.\n";
+
+        }
+
+        else {
+            cout << "Client not found.\n";
+        }
+
+
+
+
+    }
+
+   
 };
-
- 
+  static vector<Employee> vectorEmployee;

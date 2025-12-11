@@ -12,7 +12,7 @@ protected:
     string password;
 
 public:
-    Person() {}
+    Person() { id = 0; }
     Person(int id, string name, string password) : id(id), name(name), password(password) {
         //اضافة الفلاديشن 
     };
@@ -51,12 +51,6 @@ public:
 
         }
     }
-
-
-
-
-
-
 
 };
 

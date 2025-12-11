@@ -19,7 +19,7 @@ public:
         this->balance = balance;
     }
 
-    void deposit(double amount) { // فانكشن يعمل ايداع وتضيفه في الحساب
+    void deposit(double amount) { 
         if (Validation::vaamount(amount)) {
             balance += amount;
             cout << "the new balace is: " << balance << endl;
@@ -27,11 +27,12 @@ public:
     }
 
 
-    void withdraw(double amount) { // فانكشن تسحب مبلغ وتخصمه من الحساب
-        if (Validation::vaamount(amount)) return;
+    void withdraw(double amount) { 
+        if (!Validation::vaamount(amount)) return;
         if (amount < balance) {
             balance -= amount;
-            cout << "the new balanc is: " << balance << endl; //مفيش طباعة نهائيي
+            cout << "the new balanc is: " << balance << endl;
+
         }
         else {
             cout << "the balance not enghe " << endl;
@@ -41,7 +42,7 @@ public:
 
     void transferTo(double amount, Client& anther) { // هنا فانكشن تحول المبلغ لحساب تاني وتخصمه من الحساب اللي مفتوح
         int enterid;
-        if (Validation::vaamount(amount)) return;
+        if (!Validation::vaamount(amount)) return;
         if (amount < balance && amount >0) {
             balance -= amount;
             anther.balance += amount;
@@ -52,7 +53,7 @@ public:
     }
 
 
-    void checkBalance() { // فانكشن تهر المبلغ الحالي في الحساب 
+    void checkBalance() { // فانكشن تظهر المبلغ الحالي في الحساب 
         cout << "the balance is: " << getbalance() << endl;
     }
 
@@ -61,4 +62,10 @@ public:
         cout << "the name is: " << getname() << "\nthe id is: " << getid() <<
             "\nthe balance is: " << getbalance() << endl;
     }
+
+
+     
 };
+
+static vector<Client> vectorClient;
+   
