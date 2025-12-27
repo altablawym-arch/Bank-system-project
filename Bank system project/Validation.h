@@ -1,7 +1,8 @@
 ﻿#pragma once
-#include <string>
+//#include <string>
 #include <iostream>
 using namespace std;
+//fanish
 class Validation
 {
 public:
@@ -11,7 +12,7 @@ public:
             return false;
         }
         for (char a : name) {
-            if (!isalpha(a)) { // اضافة المسافة 
+            if (!isalpha(a)) {  
 
                 cout << " name must contain only letters.\n";
                 return false;

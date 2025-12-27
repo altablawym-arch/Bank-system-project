@@ -5,12 +5,10 @@
 #include "FilesHelper.h"
 #include "Employee.h"
 #include"Validation.h"
-
 using namespace std;
-
-class ClientManager : public Person {
+class ClientManager {
 public:
-   
+	
     static void printClientMenu() {
         cout << "----- Client Menu -----\n\n";
         cout << "1. View Balance\n";
@@ -21,13 +19,13 @@ public:
         cout << "-----------------------\n";
     }
 
-    static void updatePassword(Person* person) {
+    static void  updatePassword(Client* person) {
         string newPassword;
         cout << "Enter new password: ";
         cin >> newPassword;
         person->setpassword(newPassword);
         cout << "Password updated successfully.\n";
-        
+
         ofstream file("client.txt", ios::trunc);
         if (file.is_open()) {
             for (auto& c : vectorClient) {
@@ -36,10 +34,11 @@ public:
             }
             file.close();
         }
-    }                          
+    }
 
     static Client* login(int id, string password) {
-        FilesHelper::getClients(); 
+        FilesHelper fh;
+        fh.getClients();
         for (auto& c : vectorClient) {
             if (c.getid() == id && c.getpassword() == password) {
                 cout << "Login successful. Welcome, " << c.getname() << "\n";
@@ -105,4 +104,6 @@ public:
         }
         return true;
     }
+
+
 };

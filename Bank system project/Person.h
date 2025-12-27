@@ -1,11 +1,11 @@
 ﻿#pragma once
-#include<iostream>
-#include <string>
+//#include<iostream>
+//#include <string>
 #include "Validation.h"
 using namespace std;
 
 
-class Person {                     //هنا كلاس عام عشان الكل يورث منه 
+class Person {                      
 protected:
     int id;
     string name;
@@ -14,7 +14,7 @@ protected:
 public:
     Person() { id = 0; }
     Person(int id, string name, string password) : id(id), name(name), password(password) {
-        //اضافة الفلاديشن 
+         
     };
 
     int getid() {
@@ -26,14 +26,14 @@ public:
     string getpassword() {
         return password;
     }
-    bool login(int getid, string getpassword) { //فانكشن عشان نسجل الدخول
+    bool login(int getid, string getpassword) { 
         if (id == getid && password == getpassword)
             return true;
         else
             return false;
     }
 
-    virtual void display() { // فانكشن اوفررايد تتعدل في باقي الكلاسيسز 
+    virtual void display() {  
         cout << " person " << endl;
     }
 

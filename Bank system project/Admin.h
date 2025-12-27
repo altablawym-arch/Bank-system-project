@@ -1,7 +1,12 @@
 ﻿#pragma once
 #include "Employee.h"
-#include<vector>
-#include "FilesHelper.h"
+//#include "FilesHelper.h"
+//
+//#include <vector>
+//#include <string>
+//#include <iostream>
+//#include <fstream>
+//#include <algorithm>
 
 class Admin : public Employee {
 
@@ -13,32 +18,34 @@ public:
 
     void setsalary(double salary) {  
         if (Validation::vaamount(salary)) {
-
+            Employee::setsalary(salary);
         }
     }
 
 
     void addEmployee(Employee& employee) {
+
         vectorEmployee.push_back(employee);
         FilesHelper::saveEmployee(employee);
     }
 
     Employee* searchEmployee(int id) {
+
         for (auto& e : vectorEmployee) {
             if (e.getid() == id) {
-                return&e;
+                return &e;
             }
         }
         return nullptr;
     }
 
 
-    void editEmployee(int id, string name, string password, double salary) {
-        Employee* e = searchEmployee(id);
+    void editEmployee(Employee& data) {
+        Employee* e = searchEmployee(data.getid());
         if (e != nullptr) {
-            e->setname(name);
-            e->setpassword(password);
-            e->setsalary(salary);
+            e->setname(data.getname());
+            e->setpassword(data.getpassword());
+            e->setsalary(data.getsalary());
         }
 
         ofstream file("employee.txt", ios::trunc);
@@ -67,8 +74,15 @@ public:
                 << "The Balance Is: " << c.getsalary() << " || " << endl;
         }
     }
+
+    void removeEmployee() {
+        
+
+
 };
 
 
-extern vector<Admin> vectorAdmin;
+    static vector<Admin> vectorAdmin;
+
+
 

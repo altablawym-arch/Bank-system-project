@@ -1,10 +1,11 @@
 #pragma once
-#include <iostream>
+/*#include <iostream>
 #include<string>
 #include <cctype>
 #include "Person.h"
 #include<vector>
-#include "FilesHelper.h"
+#include "FilesHelper.h"*/ 
+#include"Client.h"
 
 class Employee : public Person {
 private:
@@ -46,8 +47,9 @@ public:
 
 
     void addClient(Client& client) {
+        FilesHelper fh;
         vectorClient.push_back(client);
-        FilesHelper::saveClient(client);
+        fh.saveClient(client);
     }
 
 
@@ -71,7 +73,7 @@ public:
     void editClient(int id, string name, string password, double balance) {
 
         Client* c = searchClient(id);
-        if (c != nullptr) {
+        if (c ) {
             c->setname(name);
             c->setpassword(password);
             c->setbalance(balance);
@@ -102,4 +104,4 @@ public:
 
    
 };
-  static vector<Employee> vectorEmployee;
+ vector<Employee> vectorEmployee;

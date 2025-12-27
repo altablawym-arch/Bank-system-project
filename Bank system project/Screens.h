@@ -1,65 +1,85 @@
 #pragma once
 #include <iostream>
-#include <string>
-#include "Admin.h"
-#include "Employee.h"
+//#include <string>
+//#include "Admin.h"
+//#include "Employee.h"
+#include"ClientManger.h"
+// add adminmangaer add empmangaer
 using namespace std;
 class Screens {
 public:
-    static void bankName() {
+
+    void bankName() {
         cout << "===============================\n";
-        cout << "       Tablawy BANK SYSTEM\n";
+        cout << "       Rute BANK SYSTEM\n";
         cout << "===============================\n";
     }
 
-    static void welcome() {
+    void welcome() {
         bankName();
         cout << "Welcome to the Banking System!\n";
     }
 
-    static void loginOptions() {
-        cout << "1. Login as Admin" << endl;
-        cout << "2. Login as Employee" << endl;
-        cout << "3. Exit" << endl;
+    void loginOptions() {
+        cout << "1. Login as Client\n";
+        cout << "2. Login as Employee\n";
+        cout << "3. Login as Admin\n";
+        cout << "4. Exit\n";
     }
 
-    static int loginAs() {
+    int loginAs() {
         int c;
         cout << "Choose option: ";
         cin >> c;
         return c;
     }
 
-    static void invalid(int c) {
+    void invalid(int c) {
         cout << "Invalid option (" << c << ")" << endl;
     }
 
-    static void logout() {
+    void logout() {
         cout << "Logged out successfully!" << endl;
     }
 
-    static void loginScreen(int c) {
+    void loginScreen(int c) {
         int id;
-        string pass;
+        string password;
 
         cout << "Enter ID: ";
         cin >> id;
         cout << "Enter Password: ";
-        cin >> pass;
+        cin >> password;
 
         if (c == 1) {
-            Admin* a = AdminManager::login(id, pass);
-            if (a) {
-                cout << "Admin logged in successfully!" << endl;
-                AdminManager::AdminOptions(a);
+            Client* client = ClientManager::login(id, password);
+            if (client) {
+                while (ClientManager::clientOptions(client));
             }
-            else cout << "Wrong data!" << endl;
-
+            else {
+                cout << "Wrong ID or password .\n";
+            }
         }
         else if (c == 2) {
-            cout << "Employee login not implemented yet!" << endl;
+            Employee* emp = EmployeeManager::login(id, password);
+            if (emp) {
+                while (EmployeeManager::employeeOptions(emp));
+            }
+            else {
+                cout << "Wrong ID or password\n";
+            }
+        }
+        else if (c == 3) {
+            Admin* admin = AdminManager::login(id, password);
+            if (admin) {
+                while (AdminManager::adminOptions(admin));
+            }
+            else {
+                cout << "Wrong ID or password\n";
+            }
         }
     }
+
 
     static void runApp() {
         while (true) {
@@ -76,5 +96,5 @@ public:
             loginScreen(c);
         }
     }
-};
 
+};

@@ -11,7 +11,7 @@
     class EmployeeManager {
     public:
 
-        
+
         static void printEmployeeMenu() {
             cout << "==== Employee Menu ====\n";
             cout << "1. Add New Client\n";
@@ -21,7 +21,7 @@
             cout << "5. Logout\n";
         }
 
-       
+
         static void newClient(Employee* employee) {
             string name, password;
             double balance;
@@ -33,17 +33,17 @@
             cout << "Enter initial balance: ";
             cin >> balance;
 
-            Client c(0, name, password, balance); 
+            Client c(0, name, password, balance);
             employee->addClient(c);
             cout << "Client added successfully.\n";
         }
 
-        
+
         static void listAllClients(Employee* employee) {
             employee->lestClients();
         }
 
-        
+
         static void searchForClient(Employee* employee) {
             int id;
             cout << "Enter client ID to search: ";
@@ -58,7 +58,7 @@
             }
         }
 
-        
+
         static void editClientInfo(Employee* employee) {
             int id;
             string name, password;
@@ -76,9 +76,10 @@
             employee->editClient(id, name, password, balance);
         }
 
-        
+
         static Employee* login(int id, string password) {
-            FilesHelper::getEmployees(); 
+            FilesHelper fh;
+            fh.getEmployees();
             for (auto& e : vectorEmployee) {
                 if (e.getid() == id && e.getpassword() == password) {
                     cout << "Login successful. Welcome, " << e.getname() << "!\n";
@@ -89,7 +90,7 @@
             return nullptr;
         }
 
-        
+
         static bool employeeOptions(Employee* employee) {
             if (!employee) return false;
 
@@ -119,7 +120,6 @@
             }
             return true;
         }
-    };
-
+    }; 
 
 

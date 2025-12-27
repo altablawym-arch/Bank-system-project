@@ -1,12 +1,13 @@
-#pragma once
+﻿#pragma once
 #include <iostream>
 #include <string>
 #include "Admin.h"
 #include "Employee.h"
 using namespace std;
 
-class AdminManager: public Person {
+class AdminManager {
 public:
+    
     static void printEmployeeMenu() {
         cout << "\n===== Employee Menu =====" << endl;
         cout << "1. Show all employees" << endl;
@@ -17,7 +18,7 @@ public:
     }
 
     static Admin* login(int id, string password) {
-        for (auto& a : Admin::admins) {
+        for (auto& a : Admin::vectorAdmin) {
             if (a.getid() == id && a.getpassword() == password) {
                 return &a;
             }
@@ -25,7 +26,8 @@ public:
         return nullptr;
     }
 
-    static bool AdminOptions(Admin* admin) {
+    static bool adminOptions(Admin* admin, Employee e) {
+
         while (true) {
             printEmployeeMenu();
             int choice;
@@ -34,16 +36,16 @@ public:
 
             switch (choice) {
             case 1:
-                admin->listEmployees();
+                admin->listEmployee();
                 break;
             case 2:
-                admin->addEmployee();
+                admin->addEmployee(e);
                 break;
             case 3:
-                admin->removeEmployee();
+                admin->removeEmployee();   //  متنساش الفانكشن فاضية 
                 break;
             case 4:
-                admin->updateEmployee();
+                admin->editEmployee(e);
                 break;
             case 5:
                 return false;
@@ -53,6 +55,8 @@ public:
         }
         return true;
     }
+
+
 };
 
 

@@ -1,26 +1,22 @@
 #pragma once
-#include<vector>
-#include "Client.h"
-#include "Employee.h"
-#include "Admin.h"
-#include <fstream>
+
 #include "FilesHelper.h"
 #include "DataSourceInterface.h"
 
 class FileManager : public DataSourceInterface {
-
+	FilesHelper fh;
 public:
-  void addClient( Client& c)     {FilesHelper::saveClient(c); }
-  void addEmployee(Employee& e)  { FilesHelper::saveEmployee(e); }
-  void addAdmin(Admin& a)        { FilesHelper::saveAdmin(a); }
+	void addClient(Client c) { fh.saveClient(c); }
+	void addEmployee(Employee e) { fh.saveEmployee(e); }
+	void addAdmin(Admin a) { fh.saveAdmin(a); }
 
-  void getAllClients()           { FilesHelper::getClients(); }
-  void getAllEmployees()         { FilesHelper::getEmployees(); }
-  void getAllAdmins()             { FilesHelper::getAdmins(); }
+	void getAllClients() { fh.getClients(); }
+	void getAllEmployees() { fh.getEmployees(); }
+	void getAllAdmins() { fh.getAdmins(); }
 
-  void removeAllClients()      { FilesHelper::clearFile("client.txt", "LastClientID.txt"); }
-  void removeAllEmployees()    { FilesHelper::clearFile("employee.txt", "LastEmployeeID.txt"); }
-  void removeAllAdmins()       { FilesHelper::clearFile("admin.txt", "LastAdminID.txt"); }
+	void removeAllClients() { fh.clearFile("client.txt", "LastClientID.txt"); }
+	void removeAllEmployees() { fh.clearFile("employee.txt", "LastEmployeeID.txt"); }
+	void removeAllAdmins() { fh.clearFile("admin.txt", "LastAdminID.txt"); }
 
 
 };
